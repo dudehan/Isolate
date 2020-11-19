@@ -19,8 +19,8 @@ class _FirstPageState extends State<FirstPage> {
       appBar: AppBar(title: Text('title')),
       body: Center(
         child: FutureBuilder(
-          // future: getData('test'),
-          future: getMyStr(),
+          // future: getDataByCompute('test'),
+          future: getDataByIsolate(),
           builder: (ctx, snap) {
             print(snap);
             if (snap.hasData) {
@@ -34,7 +34,7 @@ class _FirstPageState extends State<FirstPage> {
   }
 
   /// isolate 测试
-  Future<Map<String, dynamic>> getMyStr() async {
+  Future<Map<String, dynamic>> getDataByIsolate() async {
     Map<String, dynamic> str =
         await WXIsolate.addIsolateTask<Map<String, dynamic>>(
             callBack, {'title': 'title'});
@@ -47,7 +47,7 @@ class _FirstPageState extends State<FirstPage> {
   }
 
   /// compute 测试
-  Future<String> getData(String str1) async {
+  Future<String> getDataByCompute(String str1) async {
     String str = await compute(test, str1);
     String str2 = await compute(test, str1);
     return str + str2;
